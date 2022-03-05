@@ -8,6 +8,7 @@ public class ApplicationStarter {
 	{
 		UserService us1 = new UserService();
 		
-		us1.signup();
+		//us1.signup();
+		us1.updateProfile();
 	}
 }
