@@ -1,0 +1,74 @@
+package com.jspiders.tmg.db;
+
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.List;
+
+import com.jspiders.tmg.entities.User;
+
+public class UserDB extends DatabaseUtils implements Database {
+
+	@Override
+	public int insert(Object obj) 
+	{
+		User u1 = (User) obj;//Downcast Object class(Superclass) ref to User class(Sub) ref
+		
+		String insertUserQuery = "insert into Appusers.User values(0,?,?,?,?,?);";
+		int rowCount = 0;
+		connect();
+		
+		try
+		{
+			PreparedStatement psm = con.prepareStatement(insertUserQuery);
+			
+			psm.setString(1,u1.getName());//get the data from User obj and SET it o Placeholder(?)
+			psm.setString(2, u1.getEmail());
+			psm.setString(3, u1.getPassword());
+			psm.setString(4, u1.getMobile());
+			psm.setString(5, u1.getGender());
+			
+			rowCount = psm.executeUpdate();
+			
+		} 
+		catch (SQLException e) 
+		{
+			System.out.println("");
+		}
+		
+		disConnect();
+		
+		return rowCount;
+	}
+
+	@Override
+	public int update(Object obj) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int delete(Object obj) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public Object selectOne(Object obj) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Object> selectMultiple(Object obj) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Object> selectAll() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+}
